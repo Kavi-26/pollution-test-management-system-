@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import DashboardHome from './pages/dashboard/Home';
 import NewTest from './pages/dashboard/NewTest';
 import Staff from './pages/dashboard/Staff';
@@ -28,6 +29,7 @@ function App() {
           </Route>
 
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/certificate/:id" element={<Certificate />} />
 
           {/* Protected Admin/Staff Routes */}

@@ -13,8 +13,8 @@ export default function Home() {
                         We ensure your vehicle meets environmental standards with precision and speed.
                     </p>
                     <div className="hero-actions">
-                        <Link to="/verify" className="btn btn-primary btn-lg">Verify Certificate</Link>
-                        <Link to="/login" className="btn btn-secondary btn-lg">Staff Login</Link>
+                        <Link to="/login" state={{ role: 'user' }} className="btn btn-primary btn-lg">User Login</Link>
+                        <Link to="/login" state={{ role: 'staff' }} className="btn btn-secondary btn-lg">Staff Login</Link>
                     </div>
                 </div>
                 <div className="hero-image">

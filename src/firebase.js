@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
@@ -23,5 +23,19 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+
+// Helper to get a secondary auth instance (for Admin creating Staff)
+// We use a different app name to avoid conflict with the main app instance
+export const getSecondaryAuth = () => {
+  let secondaryApp;
+  const secondaryAppName = "SecondaryApp";
+
+  if (getApps().some(app => app.name === secondaryAppName)) {
+    secondaryApp = getApp(secondaryAppName);
+  } else {
+    secondaryApp = initializeApp(firebaseConfig, secondaryAppName);
+  }
+  return getAuth(secondaryApp);
+};
 
 export default app;
