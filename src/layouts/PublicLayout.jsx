@@ -11,7 +11,6 @@ export default function PublicLayout() {
                         <Link to="/about" className="nav-link">About</Link>
                         <Link to="/contact" className="nav-link">Contact</Link>
                         <Link to="/verify" className="nav-link">Verify</Link>
-                        <Link to="/login" className="nav-link btn btn-primary btn-sm">Staff Login</Link>
                     </div>
                 </div>
             </nav>

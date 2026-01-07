@@ -3,8 +3,11 @@
 .home-container {
     overflow-x: hidden;
     position: relative;
-    background: radial-gradient(circle at top right, #f1f5f9, transparent 40%),
-        radial-gradient(circle at bottom left, #e2e8f0, transparent 40%);
+    /* Soft, multi-layered gradient for depth */
+    background:
+        radial-gradient(circle at 100% 0%, rgba(96, 165, 250, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 0% 100%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+        linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
 }
 
 /* Hero Section */
@@ -74,14 +77,14 @@
     position: absolute;
     width: 600px;
     height: 600px;
-    background: linear-gradient(135deg, #dbeafe 0%, #d1fae5 100%);
+    background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
     border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: -1;
-    opacity: 0.5;
-    filter: blur(80px);
+    opacity: 0.15;
+    filter: blur(60px);
 }
 
 /* Features */
@@ -93,10 +96,13 @@
 }
 
 .feature-card {
-    background: white;
-    /* Glassy feel */
+    background: var(--bg-surface);
+    /* subtle transparency if desired, or solid surface */
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
+
     padding: 2.5rem;
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-md);
@@ -105,15 +111,16 @@
 
 .feature-card:hover {
     transform: translateY(-8px);
-    box-shadow: var(--shadow-xl);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
     border-color: var(--primary-light);
+    background: rgba(255, 255, 255, 0.85);
 }
 
 .icon {
     width: 64px;
     height: 64px;
-    background: #eff6ff;
-    border-radius: 16px;
+    background: var(--primary-soft);
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;

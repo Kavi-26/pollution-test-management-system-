@@ -74,6 +74,7 @@ export function AuthProvider({ children }) {
             name,
             email,
             role: "user",
+            isActive: true,
             createdAt: new Date().toISOString()
         });
         return result;
@@ -89,6 +90,26 @@ export function AuthProvider({ children }) {
             name,
             email,
             role: "staff",
+            isActive: true,
+            createdAt: new Date().toISOString()
+        });
+
+        // Force sign out the secondary user so it doesn't interfere
+        await signOut(secondaryAuth);
+        return result;
+    };
+
+    // Admin creating a user account (Same logic as staff creation but for 'users' role)
+    const createUserByAdmin = async (email, password, name) => {
+        const secondaryAuth = getSecondaryAuth();
+        const result = await createUserWithEmailAndPassword(secondaryAuth, email, password);
+
+        // Create user document in main DB
+        await setDoc(doc(db, "users", result.user.uid), {
+            name,
+            email,
+            role: "user",
+            isActive: true,
             createdAt: new Date().toISOString()
         });
 
@@ -107,6 +128,7 @@ export function AuthProvider({ children }) {
         login,
         signup,
         createStaff,
+        createUserByAdmin,
         logout
     };
 

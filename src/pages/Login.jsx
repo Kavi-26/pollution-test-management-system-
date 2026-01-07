@@ -78,7 +78,7 @@ export default function Login() {
                     onTouchEnd={handleTouchEnd}
                     style={{ cursor: 'pointer', userSelect: 'none' }}
                 >
-                    <h2 title="Long press to unlock Admin mode">ANBU Emission Test</h2>
+                    <h2>ANBU Emission Test</h2>
                     <h3>{displayTitle}</h3>
                 </div>
 
