@@ -1,0 +1,80 @@
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    font-size: 1.8rem;
+    color: #1e293b;
+}
+
+.badge {
+    background: #e2e8f0;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #475569;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--primary-color);
+}
+
+.stat-card.success {
+    border-left-color: #10b981;
+}
+
+.stat-card.danger {
+    border-left-color: #ef4444;
+}
+
+.stat-card.info {
+    border-left-color: #f59e0b;
+}
+
+.stat-card h3 {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.stat-sub {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* Recent Section */
+.recent-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.recent-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Table styles are now in DashboardLayout.css */
