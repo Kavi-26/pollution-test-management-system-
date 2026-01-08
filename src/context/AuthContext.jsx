@@ -75,6 +75,7 @@ export function AuthProvider({ children }) {
             email,
             role: "user",
             isActive: true,
+            useraction: true,
             createdAt: new Date().toISOString()
         });
         return result;
@@ -91,6 +92,7 @@ export function AuthProvider({ children }) {
             email,
             role: "staff",
             isActive: true,
+            staffaction: true,
             createdAt: new Date().toISOString()
         });
 
@@ -110,6 +112,7 @@ export function AuthProvider({ children }) {
             email,
             role: "user",
             isActive: true,
+            useraction: true,
             createdAt: new Date().toISOString()
         });
 

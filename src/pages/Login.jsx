@@ -33,7 +33,7 @@ export default function Login() {
             setIsAdminLogin(prev => !prev);
             // Optional: Vibrate device if supported
             if (navigator.vibrate) navigator.vibrate(200);
-        }, 2000); // 2 seconds long press
+        }, 2000); // 2 seconds opU!uress
     };
 
     const handleTouchEnd = () => {
@@ -64,7 +64,7 @@ export default function Login() {
     // Admin overrides everything if unlocked
     const displayTitle = isAdminLogin ? 'Admin Portal' : (isStaffView ? 'Staff Login' : 'User Login');
     // Ensure accurate placeholders as requested
-    const displayPlaceholder = isAdminLogin ? "anbuemission@gmail.com" : (isStaffView ? "staff@anbu.com" : "user@example.com");
+    const displayPlaceholder = isAdminLogin ? "anbutest@gmail.com" : (isStaffView ? "staff@anbu.com" : "user@example.com");
 
     return (
         <div className={`login-container ${isAdminLogin ? 'admin-mode' : ''}`}>
