@@ -33,7 +33,7 @@ export default function Login() {
             setIsAdminLogin(prev => !prev);
             // Optional: Vibrate device if supported
             if (navigator.vibrate) navigator.vibrate(200);
-        }, 2000); // 2 seconds opU!uress
+        }, 2000); // 2 seconds long press
     };
 
     const handleTouchEnd = () => {
