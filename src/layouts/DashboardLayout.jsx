@@ -35,9 +35,14 @@ export default function DashboardLayout() {
                         Reports
                     </Link>
                     {userRole === 'admin' && (
-                        <Link to="/dashboard/staff" className={`nav-item ${isActive('/dashboard/staff')}`}>
-                            Staff Management
-                        </Link>
+                        <>
+                            <Link to="/dashboard/staff" className={`nav-item ${isActive('/dashboard/staff')}`}>
+                                Staff Management
+                            </Link>
+                            <Link to="/dashboard/users" className={`nav-item ${isActive('/dashboard/users')}`}>
+                                User Management
+                            </Link>
+                        </>
                     )}
                 </nav>
                 <div className="sidebar-footer">

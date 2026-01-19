@@ -23,6 +23,9 @@ export default function Login() {
         if (location.state?.role) {
             setCurrentViewRole(location.state.role);
         }
+        if (location.state?.adminMode) {
+            setIsAdminLogin(true);
+        }
     }, [location.state]);
 
     // Hidden Gesture Logic

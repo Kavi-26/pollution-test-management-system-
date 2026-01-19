@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import DashboardHome from './pages/dashboard/Home';
 import NewTest from './pages/dashboard/NewTest';
 import Staff from './pages/dashboard/Staff';
+import Users from './pages/dashboard/Users';
 import Reports from './pages/dashboard/Reports';
 import Certificate from './pages/Certificate';
 import Verification from './pages/Verification';
@@ -42,6 +43,7 @@ function App() {
             <Route path="new-test" element={<NewTest />} />
             <Route path="reports" element={<Reports />} />
             <Route path="staff" element={<Staff />} />
+            <Route path="users" element={<Users />} />
           </Route>
 
           {/* Fallback */}

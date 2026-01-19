@@ -3,12 +3,14 @@ import { db } from '../../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import Tesseract from 'tesseract.js';
 import './NewTest.css';
 
 export default function NewTest() {
     const { currentUser } = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [ocrLoading, setOcrLoading] = useState(false); // State for OCR
     const [formData, setFormData] = useState({
         vehicleNumber: '',
         vehicleType: 'car',
@@ -25,6 +27,54 @@ export default function NewTest() {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    // OCR Handler
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        setOcrLoading(true);
+        try {
+            const result = await Tesseract.recognize(
+                file,
+                'eng',
+                { logger: m => console.log(m) }
+            );
+
+            const text = result.data.text;
+            console.log("Extracted Text:", text);
+
+            // Simple Regex Parsing (Can be improved based on certificate format)
+            const extractedData = {};
+
+            // Vehicle Number (e.g., TN-01-AB-1234 or TN01AB1234)
+            const vehicleNumMatch = text.match(/[A-Z]{2}[ -]?[0-9]{2}[ -]?[A-Z]{1,2}[ -]?[0-9]{4}/i);
+            if (vehicleNumMatch) extractedData.vehicleNumber = vehicleNumMatch[0].toUpperCase();
+
+            // Fuel Type
+            if (/petrol/i.test(text)) extractedData.fuelType = 'petrol';
+            else if (/diesel/i.test(text)) extractedData.fuelType = 'diesel';
+            else if (/cng/i.test(text)) extractedData.fuelType = 'cng';
+            else if (/electric/i.test(text)) extractedData.fuelType = 'electric';
+
+            // CO Level
+            const coMatch = text.match(/CO\s*[:%-]?\s*(\d+(\.\d+)?)/i);
+            if (coMatch) extractedData.coLevel = coMatch[1];
+
+            // HC Level
+            const hcMatch = text.match(/HC\s*[:%-]?\s*(\d+)/i);
+            if (hcMatch) extractedData.hcLevel = hcMatch[1];
+
+            alert("Data extracted! Please verify the fields.");
+            setFormData(prev => ({ ...prev, ...extractedData }));
+
+        } catch (err) {
+            console.error(err);
+            alert("Failed to read image. Please enter details manually.");
+        } finally {
+            setOcrLoading(false);
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -66,6 +116,20 @@ export default function NewTest() {
     return (
         <div className="container new-test-container">
             <h1>New Pollution Test</h1>
+
+            {/* Auto-fill Section */}
+            <div className="ocr-upload-section" style={{ marginBottom: '2rem', padding: '1.5rem', background: '#f8f9fa', borderRadius: '8px', border: '1px dashed #ced4da' }}>
+                <h3>Auto-fill Details</h3>
+                <p>Upload a photo of the previous certificate or RC book to auto-fill details.</p>
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    disabled={ocrLoading}
+                />
+                {ocrLoading && <p style={{ color: 'var(--primary-color)', marginTop: '0.5rem' }}>Scanning image... Please wait.</p>}
+            </div>
+
             <form onSubmit={handleSubmit} className="test-form">
 
                 {/* Vehicle Details */}

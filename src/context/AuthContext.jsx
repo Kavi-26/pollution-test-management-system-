@@ -22,7 +22,7 @@ export function AuthProvider({ children }) {
     // Helper to check role across collections
     const fetchUserRole = async (uid, email) => {
         // 0. Hardcoded Super Admin (Failsafe)
-        if (email === 'anbuemission@gmail.com') return 'admin';
+        if (email === 'anbuemission@gmail.com' || email === 'anbutest@gmail.com') return 'admin';
 
         // 1. Check Admin
         const adminDoc = await getDoc(doc(db, "admins", uid));

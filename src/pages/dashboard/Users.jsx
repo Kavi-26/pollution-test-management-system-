@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 import { db } from '../../firebase';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { useAuth } from '../../context/AuthContext';
-import './Staff.css';
+import './Staff.css'; // Reusing Staff styles for consistency
 
-export default function Staff() {
-    const { userRole, createStaff } = useAuth();
+export default function Users() {
+    const { userRole, createUserByAdmin } = useAuth();
     const [dataList, setDataList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [formData, setFormData] = useState({ name: '', email: '', password: '' });
@@ -16,7 +16,7 @@ export default function Staff() {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const querySnapshot = await getDocs(collection(db, 'staff'));
+            const querySnapshot = await getDocs(collection(db, 'users'));
             const list = [];
             querySnapshot.forEach((doc) => {
                 list.push({ id: doc.id, ...doc.data() });
@@ -45,8 +45,8 @@ export default function Staff() {
 
         setError('');
         try {
-            await createStaff(formData.email, formData.password, formData.name);
-            alert("Staff account created successfully!");
+            await createUserByAdmin(formData.email, formData.password, formData.name);
+            alert("User account created successfully!");
 
             setFormData({ name: '', email: '', password: '' });
             setIsAdding(false);
@@ -60,7 +60,7 @@ export default function Staff() {
     const handleDelete = async (id) => {
         if (!window.confirm("Are you sure? This will delete the record from the database.")) return;
         try {
-            await deleteDoc(doc(db, 'staff', id));
+            await deleteDoc(doc(db, 'users', id));
             fetchData();
         } catch (err) {
             console.error(err);
@@ -75,18 +75,18 @@ export default function Staff() {
     return (
         <div className="dashboard-container">
             <div className="dashboard-header">
-                <h2 className="dashboard-title">Staff Management</h2>
+                <h2 className="dashboard-title">User Management</h2>
             </div>
 
             <div className="action-bar">
                 <button className="btn btn-primary" onClick={() => setIsAdding(!isAdding)}>
-                    {isAdding ? 'Cancel' : 'Add New Staff'}
+                    {isAdding ? 'Cancel' : 'Add New User'}
                 </button>
             </div>
 
             {isAdding && (
                 <div className="form-container">
-                    <h3 className="form-title">Create New Staff Account</h3>
+                    <h3 className="form-title">Create New User Account</h3>
 
                     {error && <div className="error-message">{error}</div>}
 
@@ -95,7 +95,7 @@ export default function Staff() {
                         <input name="email" type="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required />
                         <input name="password" type="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
                         <button type="submit" className="btn btn-primary" style={{ width: 'fit-content' }}>
-                            Create Staff Account
+                            Create User Account
                         </button>
                     </form>
                 </div>
@@ -121,8 +121,8 @@ export default function Staff() {
                                     <td>{item.name || 'N/A'}</td>
                                     <td>{item.email}</td>
                                     <td>
-                                        <span className="badge badge-staff">
-                                            {item.role || 'staff'}
+                                        <span className="badge badge-user">
+                                            {item.role || 'user'}
                                         </span>
                                     </td>
                                     <td>
