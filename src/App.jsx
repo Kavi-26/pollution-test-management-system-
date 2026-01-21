@@ -8,7 +8,6 @@ import NewTest from './pages/dashboard/NewTest';
 import Staff from './pages/dashboard/Staff';
 import Users from './pages/dashboard/Users';
 import Reports from './pages/dashboard/Reports';
-import Certificate from './pages/Certificate';
 import Verification from './pages/Verification';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -31,7 +30,6 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/certificate/:id" element={<Certificate />} />
 
           {/* Protected Admin/Staff Routes */}
           <Route path="/dashboard" element={

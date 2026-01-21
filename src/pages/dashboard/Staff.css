@@ -1,9 +1,6 @@
-/* Staff/User Management Dashboard */
-
+/* Staff.css */
 .dashboard-container {
-    padding: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
+    padding: 0;
 }
 
 .dashboard-header {
@@ -11,95 +8,74 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
-    background: var(--bg-surface);
-    padding: 1.5rem 2rem;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-light);
 }
 
 .dashboard-title {
-    font-size: 1.5rem;
-    color: var(--text-main);
-    font-weight: 700;
+    font-size: 1.8rem;
+    color: #1a2332;
 }
 
 .tab-group {
     display: flex;
-    background: var(--bg-body);
+    gap: 0.5rem;
+    background: #f1f3f5;
     padding: 0.25rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-light);
+    border-radius: 6px;
 }
 
 .tab-btn {
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    color: var(--text-muted);
-    transition: var(--transition);
+    padding: 0.5rem 1.5rem;
     border: none;
     background: transparent;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 500;
+    color: #666;
 }
 
 .tab-btn.active {
     background: white;
-    color: var(--primary-color);
-    box-shadow: var(--shadow-sm);
+    color: #3498db;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .action-bar {
-    margin-bottom: 1.5rem;
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 2rem;
 }
 
-/* Modal-like Form Container */
 .form-container {
-    background: var(--bg-surface);
+    background: white;
     padding: 2rem;
+    border-radius: 8px;
     margin-bottom: 2rem;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--border-light);
-    animation: slideDown 0.3s ease-out;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .form-title {
     margin-bottom: 1.5rem;
-    font-size: 1.25rem;
-    color: var(--text-main);
+    color: #333;
 }
 
 .staff-form {
-    display: grid;
-    gap: 1.5rem;
-    max-width: 600px;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 .staff-form input {
-    padding: 1rem;
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-md);
-    background: var(--bg-body);
-    font-family: 'Inter', sans-serif;
-    transition: var(--transition);
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-.staff-form input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    background: white;
-    box-shadow: 0 0 0 3px var(--primary-soft);
-}
-
-/* Data Table */
 .table-container {
-    background: var(--bg-surface);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--border-light);
+    background: white;
+    border-radius: 8px;
     overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .data-table {
@@ -107,75 +83,46 @@
     border-collapse: collapse;
 }
 
-.data-table th {
-    background: #f8fafc;
-    padding: 1rem 1.5rem;
-    text-align: left;
-    font-weight: 600;
-    color: var(--text-muted);
-    border-bottom: 1px solid var(--border-light);
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
+.data-table th,
 .data-table td {
-    padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid var(--border-light);
-    color: var(--text-main);
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
 }
 
-.data-table tr:last-child td {
-    border-bottom: none;
-}
-
-.data-table tr:hover {
-    background-color: #f8fafc;
-}
-
-/* Role Badges */
-.badge {
-    padding: 0.35rem 0.85rem;
-    border-radius: 2rem;
-    font-size: 0.75rem;
+.data-table th {
+    background-color: #f8f9fa;
+    color: #666;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+}
+
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
 }
 
 .badge-staff {
-    background: #e0e7ff;
-    color: #4338ca;
+    background-color: #e3f2fd;
+    color: #1976d2;
 }
 
 .badge-user {
-    background: #dcfce7;
-    color: #15803d;
+    background-color: #e8f5e9;
+    color: #2e7d32;
 }
 
-/* Actions */
 .btn-delete {
-    color: #ef4444;
-    background: rgba(239, 68, 68, 0.1);
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-md);
-    font-weight: 500;
-    transition: var(--transition);
+    padding: 0.25rem 0.75rem;
+    background-color: #ffebee;
+    color: #c62828;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
 }
 
 .btn-delete:hover {
-    background: #ef4444;
-    color: white;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    background-color: #ffcdd2;
 }
