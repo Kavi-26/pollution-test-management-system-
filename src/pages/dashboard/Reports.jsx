@@ -9,13 +9,15 @@ export default function Reports() {
     const [filters, setFilters] = useState({
         startDate: '',
         endDate: '',
-        result: 'all'
+        result: 'all',
+        vehicleType: 'all',
+        fuelType: 'all'
     });
 
     useEffect(() => {
         const fetchReports = async () => {
             try {
-                const q = query(collection(db, "tests"), orderBy("testDate", "desc"));
+                const q = query(collection(db, "pollution_tests"), orderBy("testDate", "desc"));
                 const snapshot = await getDocs(q);
                 const data = snapshot.docs.map(doc => ({
                     id: doc.id,
@@ -37,6 +39,12 @@ export default function Reports() {
         let res = tests;
         if (filters.result !== 'all') {
             res = res.filter(t => t.testResult === filters.result);
+        }
+        if (filters.vehicleType && filters.vehicleType !== 'all') {
+            res = res.filter(t => t.vehicleType === filters.vehicleType);
+        }
+        if (filters.fuelType && filters.fuelType !== 'all') {
+            res = res.filter(t => t.fuelType === filters.fuelType);
         }
         if (filters.startDate) {
             res = res.filter(t => t.date >= new Date(filters.startDate));
@@ -86,6 +94,35 @@ export default function Reports() {
                             <option value="all">All</option>
                             <option value="Pass">Pass</option>
                             <option value="Fail">Fail</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style={{ display: 'block', fontSize: '0.8rem', marginBottom: '0.2rem' }}>Vehicle Type</label>
+                        <select
+                            value={filters.vehicleType}
+                            onChange={e => setFilters({ ...filters, vehicleType: e.target.value })}
+                            style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ddd' }}
+                        >
+                            <option value="all">All</option>
+                            <option value="bike">Bike</option>
+                            <option value="car">Car</option>
+                            <option value="auto">Auto</option>
+                            <option value="truck">Truck</option>
+                            <option value="bus">Bus</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style={{ display: 'block', fontSize: '0.8rem', marginBottom: '0.2rem' }}>Fuel Type</label>
+                        <select
+                            value={filters.fuelType}
+                            onChange={e => setFilters({ ...filters, fuelType: e.target.value })}
+                            style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ddd' }}
+                        >
+                            <option value="all">All</option>
+                            <option value="petrol">Petrol</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="cng">CNG</option>
+                            <option value="electric">Electric</option>
                         </select>
                     </div>
                     <div>

@@ -6,7 +6,20 @@ import {
     createUserWithEmailAndPassword,
     signOut
 } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, addDoc, collection, serverTimestamp } from "firebase/firestore";
+
+const logSession = async (uid, action) => {
+    try {
+        await addDoc(collection(db, "activity_logs"), {
+            uid,
+            action, // 'login', 'logout', 'upload_cert', etc.
+            timestamp: serverTimestamp(),
+            userAgent: navigator.userAgent
+        });
+    } catch (e) {
+        console.error("Failed to log session", e);
+    }
+};
 
 const AuthContext = createContext();
 
@@ -63,8 +76,10 @@ export function AuthProvider({ children }) {
         return unsubscribe;
     }, []);
 
-    const login = (email, password) => {
-        return signInWithEmailAndPassword(auth, email, password);
+    const login = async (email, password) => {
+        const result = await signInWithEmailAndPassword(auth, email, password);
+        await logSession(result.user.uid, 'login');
+        return result;
     };
 
     const signup = async (email, password, name) => {
@@ -78,6 +93,7 @@ export function AuthProvider({ children }) {
             useraction: true,
             createdAt: new Date().toISOString()
         });
+        await logSession(result.user.uid, 'signup');
         return result;
     };
 

@@ -44,6 +44,11 @@ export default function DashboardLayout() {
                             </Link>
                         </>
                     )}
+                    {userRole === 'user' && (
+                        <Link to="/dashboard/vehicles" className={`nav-item ${isActive('/dashboard/vehicles')}`}>
+                            My Vehicles
+                        </Link>
+                    )}
                 </nav>
                 <div className="sidebar-footer">
                     <button onClick={handleLogout} className="btn-logout">Logout</button>
